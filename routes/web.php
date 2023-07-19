@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\TipoController;
+use App\Http\Controllers\TrabajoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index', ['page' => '']);
 });
+
+/**
+ * Mis rutas personalizadas
+ */
+
+Route::resource('marcas', MarcaController::class);
+Route::resource('tipos', TipoController::class);
+Route::resource('equipos', EquipoController::class);
+ Route::resource('trabajos', TrabajoController::class);
