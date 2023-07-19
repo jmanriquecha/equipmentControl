@@ -7,6 +7,9 @@
             <h3>Listado de trabajos</h3>
         </div>
         <div class="card-body">
+            <div class="mb-3 d-flex justify-content-end">
+                <a href="{{ url('trabajos/create') }}" class="btn btn-primary">Nuevo</a>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
