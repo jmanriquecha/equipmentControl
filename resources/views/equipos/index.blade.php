@@ -48,8 +48,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $equipos->links() }}
             </div>
+        </div>
+        <div class="col-12 ml-0 p-0 d-flex justify-content-center">
+            {{ $equipos->onEachSide(0)->links() }}
         </div>
     </div>
 @endsection

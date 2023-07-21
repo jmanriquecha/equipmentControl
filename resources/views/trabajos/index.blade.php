@@ -16,28 +16,34 @@
                         <tr>
                             <th scope="col">Equipo</th>
                             <th scope="col">Fecha</th>
-                            <th scope="col">Hora inicio</th>
-                            <th scope="col">Hora fin</th>
-                            <th scope="col">Observacion</th>
-                            <th colspan="3" scope="col">Acciones</th>
+                            <th scope="col">Inicio</th>
+                            <th scope="col">Finalización</th>
+                            <th scope="col">Observación</th>
+                            <th scope="col" colspan="3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($trabajos as $trabajo)
                             <tr>
-                                <td>{{ $trabajo->equipo->tipo->name }} {{ $trabajo->equipo->marca->name }}</td>
+                                <td>
+                                    <a href="{{ url('equipos/' . $trabajo->equipo->id) }}">{{ $trabajo->equipo->tipo->name }}
+                                        {{ $trabajo->equipo->marca->name }}</a>
+                                </td>
                                 <td>{{ $trabajo->fecha }}</td>
-                                <td>{{ $trabajo->horaInicio }}</td>
-                                <td>{{ $trabajo->horaFin }}</td>
+                                <td>{{ $date->parse($trabajo->horaInicio, 'UTC')->isoFormat('h:mm a') }}
+                                </td>
+                                <td>
+                                    {{ $date->create($trabajo->horaFin)->locale('es')->longRelativeDiffForHumans($date->create($trabajo->horaInicio)->locale('es'), 2) }}
+                                </td>
                                 <td>{{ $trabajo->observacion }}</td>
-                                <td class="pl-0 pr-0">
+                                <td class="p-0 align-middle">
                                     <a href="{{ url('trabajos/' . $trabajo->id) }}" class="btn btn-success">Ver</a>
                                 </td>
-                                <td class="pl-0 pr-0">
+                                <td class="p-0 align-middle">
                                     <a href="{{ url('trabajos/' . $trabajo->id . '/edit') }}"
                                         class="btn btn-primary">Editar</a>
                                 </td>
-                                <td class="pl-0 pr-0">
+                                <td class="p-0 align-middle">
                                     <form name="delete" class="d-inline" action="{{ url('trabajos/' . $trabajo->id) }}"
                                         method="POST">
                                         @csrf
@@ -51,8 +57,8 @@
                 </table>
             </div>
         </div>
-        <div class="w-1 m-0 row justify-content-center align-items-center">
-            {{ $trabajos->links() }}
+        <div class="col-12 ml-0 p-0 d-flex justify-content-center">
+            {{ $trabajos->onEachSide(0)->links() }}
         </div>
     </div>
 @endsection

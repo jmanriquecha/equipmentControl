@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trabajo;
 use App\Models\Equipo;
+use Carbon\Carbon;
 
 class TrabajoController extends Controller
 {
@@ -15,8 +16,9 @@ class TrabajoController extends Controller
      */
     public function index()
     {
-        $trabajos = Trabajo::paginate(5);
-        return view('trabajos.index', compact('trabajos'));
+        $date = new Carbon;
+        $trabajos = Trabajo::orderByDesc('fecha')->paginate(10);
+        return view('trabajos.index', compact('trabajos', 'date'));
     }
 
     /**
@@ -57,8 +59,9 @@ class TrabajoController extends Controller
      */
     public function show($id)
     {
+        $date = new Carbon;
         $trabajo = Trabajo::find($id);
-        return view('trabajos.show', compact('trabajo'));
+        return view('trabajos.show', compact('trabajo', 'date'));
     }
 
     /**

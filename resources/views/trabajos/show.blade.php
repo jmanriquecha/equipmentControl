@@ -8,10 +8,13 @@
             <h3>Detalle del trabajo</h3>
         </div>
         <div class="card-body">
-            <p><strong>Marca:</strong> {{ $trabajo->equipo->tipo->name }}</p>
-            <p><strong>Tipo:</strong> {{ $trabajo->fecha }}</p>
-            <p><strong>Modelo:</strong> {{ $trabajo->horaInicio }}</p>
-            <p><strong>Serial:</strong> {{ $trabajo->horaFin }}</p>
+            <p><strong>Equipo:</strong> {{ $trabajo->equipo->tipo->name }}</p>
+            <p><strong>Fecha:</strong> {{ $trabajo->fecha }}</p>
+            <p><strong>Hora de inicio:</strong> {{ $date->parse($trabajo->horaInicio, 'UTC')->isoFormat('h:mm a') }}</p>
+            <p><strong>Hora de finalización:</strong> {{ $date->parse($trabajo->horaFin, 'UTC')->isoFormat('h:mm a') }}</p>
+            <p><strong>Tiempo transcurrido:</strong>
+                {{ $date->create($trabajo->horaFin)->locale('es')->longRelativeDiffForHumans($date->create($trabajo->horaInicio)->locale('es'), 2) }}
+            </p>
             <p><strong>Observacion:</strong> {{ $trabajo->observacion }}</p>
         </div>
         <div class="card-footer">

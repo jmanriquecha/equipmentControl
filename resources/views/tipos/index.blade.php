@@ -45,8 +45,8 @@
                 </table>
             </div>
         </div>
-        <div class="w-1 m-0 row justify-content-center align-items-center">
-            {{ $tipos->links() }}
+        <div class="col-12 ml-0 p-0 d-flex justify-content-center">
+            {{ $tipos->onEachSide(0)->links() }}
         </div>
     </div>
 @endsection
